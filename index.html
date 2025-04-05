@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xingkai Rura - Unlock Exclusive Content</title>
+    <style>
+        :root {
+            --primary: #ff4d8d;
+            --secondary: #ff8fab;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --accent: #a2d2ff;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 77, 141, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(162, 210, 255, 0.15) 0%, transparent 20%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+            box-shadow: 0 0 30px rgba(255, 77, 141, 0.5);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .unlock-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .step {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            width: 300px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 141, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 77, 141, 0.6);
+        }
+
+        .btn-primary:active {
+            transform: translateY(1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .locked-content {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 1px dashed var(--primary);
+            margin-top: 2rem;
+            opacity: 0.5;
+            transition: all 0.5s ease;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .unlocked-content {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 1px solid var(--accent);
+            margin-top: 2rem;
+            animation: fadeIn 1s ease-out;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .unlocked-content h2 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .unlocked-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .checkmark {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient);
+            position: relative;
+            margin-bottom: 1.5rem;
+            animation: bounce 1s ease;
+        }
+
+        .checkmark::after {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 30px;
+            width: 15px;
+            height: 5px;
+            background: white;
+            transform: rotate(45deg);
+        }
+
+        .checkmark::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 25px;
+            width: 25px;
+            height: 5px;
+            background: white;
+            transform: rotate(-45deg);
+        }
+
+        .progress-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.1);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            opacity: 0;
+            z-index: 1000;
+            animation: confetti 3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+
+        @keyframes confetti {
+            0% { 
+                transform: translateY(0) rotate(0deg); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translateY(100vh) rotate(720deg); 
+                opacity: 0; 
+            }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .unlock-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .step {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+        }
+
+        /* Pulse animation for completed steps */
+        .completed {
+            position: relative;
+        }
+
+        .completed::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 25px;
+            height: 25px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://d.top4top.io/p_338218p282.jpg" alt="Xingkai Rura" class="logo" id="vtuber-logo">
+            <h1 id="main-title">Xingkai Rura</h1>
+            <p class="tagline" id="main-tagline">Unlock exclusive VTuber content by completing these steps!</p>
+        </header>
+
+        <div class="content">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <div class="unlock-steps">
+                <div class="step" id="step1">
+                    <div class="step-icon" id="step1-icon">🎬</div>
+                    <h3 class="step-title" id="step1-title">Subscribe on YouTube</h3>
+                    <p class="step-description" id="step1-desc">Subscribe to Xingkai Rura's YouTube channel to get access to all videos</p>
+                    <a href="https://www.youtube.com/@xingkairura" target="_blank" class="btn btn-primary" id="youtube-btn">Subscribe Now</a>
+                </div>
+
+                <div class="step" id="step2">
+                    <div class="step-icon" id="step2-icon">💬</div>
+                    <h3 class="step-title" id="step2-title">Join WhatsApp Group</h3>
+                    <p class="step-description" id="step2-desc">Be part of the community and get updates directly</p>
+                    <a href="https://chat.whatsapp.com/K6gDbRinjB4I2xOWP5SZ8H" target="_blank" class="btn btn-primary" id="whatsapp-btn">Join Group</a>
+                </div>
+
+                <div class="step" id="step3">
+                    <div class="step-icon" id="step3-icon">📢</div>
+                    <h3 class="step-title" id="step3-title">Follow WhatsApp Channel</h3>
+                    <p class="step-description" id="step3-desc">Get official announcements and exclusive content</p>
+                    <a href="https://whatsapp.com/channel/0029VaeRwMP3GJOz7wA2bY3p" target="_blank" class="btn btn-primary" id="channel-btn">Follow Channel</a>
+                </div>
+            </div>
+
+            <div class="locked-content" id="locked-content">
+                <h2 id="locked-title">Content Locked 🔒</h2>
+                <p id="locked-desc">Complete all steps above to unlock exclusive Xingkai Rura content!</p>
+                <p>Progress: <span id="progress-text">0/3</span> completed</p>
+            </div>
+
+            <div class="unlocked-content" id="unlocked-content">
+                <div class="checkmark"></div>
+                <h2 id="unlocked-title">Congratulations! 🎉</h2>
+                <p id="unlocked-message1">You've unlocked exclusive Xingkai Rura content!</p>
+                <p id="unlocked-message2">Thank you for your support. Here's your special content:</p>
+                
+                <div style="margin: 2rem 0;">
+                    <!-- Placeholder for exclusive content -->
+                    <img src="https://d.top4top.io/p_338218p282.jpg" alt="Exclusive Content" style="width: 100%; max-width: 500px; border-radius: 10px;">
+                    <p id="content-desc" style="margin-top: 1rem;">Special VTuber message just for you!</p>
+                </div>
+
+                <a href="/vynaa/pageshare.html" class="btn btn-primary" id="download-btn">Lanjut Claim THR!!</a>
+            </div>
+
+            <div class="social-links">
+                <a href="#" class="social-link" id="social1">📘</a>
+                <a href="#" class="social-link" id="social2">📸</a>
+                <a href="#" class="social-link" id="social3">🐦</a>
+                <a href="#" class="social-link" id="social4">🎵</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2023 Xingkai Rura VTuber. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="settingspage1.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize completed steps from localStorage
+            let completedSteps = JSON.parse(localStorage.getItem('completedSteps')) || {
+                youtube: false,
+                whatsapp: false,
+                channel: false
+            };
+
+            // Update UI based on completed steps
+            updateProgress();
+
+            // YouTube button click handler
+            document.getElementById('youtube-btn').addEventListener('click', function() {
+                completedSteps.youtube = true;
+                localStorage.setItem('completedSteps', JSON.stringify(completedSteps));
+                updateProgress();
+            });
+
+            // WhatsApp group button click handler
+            document.getElementById('whatsapp-btn').addEventListener('click', function() {
+                completedSteps.whatsapp = true;
+                localStorage.setItem('completedSteps', JSON.stringify(completedSteps));
+                updateProgress();
+            });
+
+            // Channel button click handler
+            document.getElementById('channel-btn').addEventListener('click', function() {
+                completedSteps.channel = true;
+                localStorage.setItem('completedSteps', JSON.stringify(completedSteps));
+                updateProgress();
+            });
+
+            function updateProgress() {
+                const progress = Object.values(completedSteps).filter(Boolean).length;
+                const progressPercent = (progress / 3) * 100;
+                
+                // Update progress bar
+                document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+                document.getElementById('progress-text').textContent = `${progress}/3`;
+                
+                // Update step UI
+                if (completedSteps.youtube) {
+                    document.getElementById('step1').classList.add('completed');
+                }
+                if (completedSteps.whatsapp) {
+                    document.getElementById('step2').classList.add('completed');
+                }
+                if (completedSteps.channel) {
+                    document.getElementById('step3').classList.add('completed');
+                }
+                
+                // Check if all steps are completed
+                if (progress === 3) {
+                    document.getElementById('locked-content').style.display = 'none';
+                    document.getElementById('unlocked-content').style.display = 'block';
+                    createConfetti();
+                } else {
+                    document.getElementById('locked-content').style.display = 'block';
+                    document.getElementById('unlocked-content').style.display = 'none';
+                }
+            }
+
+            function createConfetti() {
+                const colors = ['#ff4d8d', '#ff8fab', '#a2d2ff', '#bde0fe', '#cdb4db'];
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = `${Math.random() * 100}vw`;
+                    confetti.style.top = '-10px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = `${Math.random() * 10 + 5}px`;
+                    confetti.style.height = `${Math.random() * 10 + 5}px`;
+                    confetti.style.animationDelay = `${Math.random() * 2}s`;
+                    document.body.appendChild(confetti);
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }
+            }
+
+            // Animate steps on load
+            const steps = document.querySelectorAll('.step');
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.style.opacity = '1';
+                    step.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
