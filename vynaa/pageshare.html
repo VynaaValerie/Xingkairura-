@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>THR Share 20 - Dapatkan THR Gratis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #FF4D8A;
+      --secondary: #FF8EBA;
+      --accent: #25D366;
+      --text: #333333;
+      --light: #FFFFFF;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --radius: 20px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('https://f.top4top.io/p_33825t3wd5.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      line-height: 1.6;
+      padding: 20px;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.85);
+      z-index: -1;
+    }
+    
+    .container {
+      background: var(--light);
+      border-radius: var(--radius);
+      padding: 40px 30px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 450px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+    
+    h1 {
+      color: var(--primary);
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    p {
+      color: var(--text);
+      font-size: 16px;
+      margin-bottom: 25px;
+      opacity: 0.9;
+    }
+    
+    .progress-container {
+      background: #F5F5F5;
+      border-radius: 50px;
+      margin: 25px 0;
+      width: 100%;
+      height: 16px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .progress-bar {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      height: 100%;
+      width: 0%;
+      border-radius: 50px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .progress-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0.1) 0%,
+        rgba(255,255,255,0.3) 50%,
+        rgba(255,255,255,0.1) 100%
+      );
+      animation: shimmer 2s infinite;
+    }
+    
+    .count {
+      margin: 15px 0 25px;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--primary);
+    }
+    
+    .share-btn {
+      background: var(--accent);
+      color: var(--light);
+      padding: 16px 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      text-decoration: none;
+      display: inline-block;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .share-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+    }
+    
+    .share-btn:active {
+      transform: translateY(1px);
+    }
+    
+    .share-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
+    }
+    
+    .share-btn:focus:not(:active)::after {
+      animation: ripple 1s ease-out;
+    }
+    
+    .done-message {
+      margin-top: 25px;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 18px;
+      display: none;
+      animation: bounceIn 0.8s;
+    }
+
+    .game-btn {
+      background: var(--primary);
+      color: var(--light);
+      padding: 16px 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      text-decoration: none;
+      display: none;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(255, 77, 138, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .game-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 77, 138, 0.4);
+    }
+    
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: var(--primary);
+      opacity: 0;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
+    @keyframes ripple {
+      0% {
+        transform: scale(0, 0);
+        opacity: 1;
+      }
+      20% {
+        transform: scale(25, 25);
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(40, 40);
+      }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      p {
+        font-size: 14px;
+      }
+      
+      .share-btn, .game-btn {
+        padding: 14px 25px;
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dapatkan THR Gratis!</h1>
+    <p>Bagikan ke 20 orang teman untuk mendapatkan THR spesial dari kami</p>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="count" id="countText">Progress: 0/20</div>
+
+    <button class="share-btn" onclick="share()">
+      <span id="btnText">Bagikan via WhatsApp</span>
+    </button>
+
+    <div class="done-message" id="doneMessage">
+      🎉 Selamat! Kamu berhasil membagikan ke 20 orang!
+    </div>
+
+    <button class="game-btn" id="gameBtn" onclick="goToGame()">Lanjutkan ke Game</button>
+  </div>
+
+  <script>
+    let count = 0;
+    const maxCount = 20;
+
+    function share() {
+      if (count >= maxCount) return;
+
+      // WhatsApp message
+      const msg = encodeURIComponent("Hai! Ayo dapatkan THR gratis dengan membagikan ini juga! Klik link ini: https://xingkairura.vercel.app");
+      window.open(`https://wa.me/?text=${msg}`, "_blank");
+
+      count++;
+      updateProgress();
+      
+      // Update button text when nearing completion
+      if (count >= maxCount - 3) {
+        document.getElementById('btnText').textContent = `Lagi ${maxCount - count} lagi!`;
+      }
+      
+      // Create confetti effect when completed
+      if (count === maxCount) {
+        createConfetti();
+      }
+    }
+
+    function updateProgress() {
+      const bar = document.getElementById("progressBar");
+      const countText = document.getElementById("countText");
+      const doneMessage = document.getElementById("doneMessage");
+      const gameBtn = document.getElementById("gameBtn");
+
+      const percent = Math.min(100, (count / maxCount) * 100);
+      bar.style.width = percent + "%";
+      countText.textContent = `Progress: ${count}/${maxCount}`;
+      countText.style.color = `hsl(${percent * 1.2}, 80%, 50%)`;
+
+      if (count >= maxCount) {
+        doneMessage.style.display = "block";
+        gameBtn.style.display = "inline-block";
+      }
+    }
+
+    function goToGame() {
+      window.location.href = "/vynaa/game.html";
+    }
+
+    function createConfetti() {
+      const colors = ['#FF4D8A', '#FF8EBA', '#25D366', '#FFD166', '#06D6A0'];
+      const container = document.querySelector('.container');
+      
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = -10 + 'px';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        
+        container.appendChild(confetti);
+        
+        const animationDuration = Math.random() * 3 + 2;
+        
+        confetti.style.animation = `
+          drop ${animationDuration}s ease-in forwards,
+          fade ${animationDuration}s ease-in forwards
+        `;
+        
+        // Add animation styles dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+          @keyframes drop {
+            to { top: 100%; }
+          }
+          @keyframes fade {
+            to { opacity: 0; }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    }
+  </script>
+</body>
+</html>
