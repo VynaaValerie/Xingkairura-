@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gacha THR Spesial</title>
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #ffa502;
+            --dark: #2f3542;
+            --light: #f1f2f6;
+            --success: #2ed573;
+            --danger: #ff4757;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(rgba(47, 53, 66, 0.85), rgba(47, 53, 66, 0.85)), 
+                        url('https://f.top4top.io/p_33825t3wd5.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(47, 53, 66, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .machine {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(145deg, #3d4453, #2a303a);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .machine::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .display {
+            width: 80%;
+            height: 80%;
+            background-color: var(--dark);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--light);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .prize {
+            position: absolute;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.5s ease;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .prize.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .prize-amount {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+        }
+        
+        .prize-label {
+            font-size: 18px;
+            opacity: 0.8;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            margin-bottom: 20px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn:disabled {
+            background: #57606f;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0) 45%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 55%
+            );
+            transform: rotate(30deg);
+            animation: btnShine 3s infinite;
+        }
+        
+        @keyframes btnShine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+        
+        .attempts {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .attempts span {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .result.success {
+            background: rgba(46, 213, 115, 0.2);
+            border: 1px solid var(--success);
+            display: block;
+        }
+        
+        .result.fail {
+            background: rgba(255, 71, 87, 0.2);
+            border: 1px solid var(--danger);
+            display: block;
+        }
+        
+        .result.show {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+            z-index: 10;
+        }
+        
+        .whatsapp-btn {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+            background: #128C7E;
+        }
+        
+        .whatsapp-btn i {
+            margin-right: 8px;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                width: 95%;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .prize-amount {
+                font-size: 32px;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 GACHA THR SPESIAL 🎉</h1>
+        <p class="description">Dapatkan kesempatan memenangkan THR 10.000, 5.000, atau mungkin zonk. Anda memiliki 3 kesempatan bermain!</p>
+        
+        <div class="machine">
+            <div class="display" id="display">
+                <div class="prize" id="prize-0">
+                    <div class="prize-amount">ZONK</div>
+                    <div class="prize-label">Coba lagi ya!</div>
+                </div>
+                <div class="prize" id="prize-1">
+                    <div class="prize-amount">Rp 5.000</div>
+                    <div class="prize-label">Selamat!</div>
+                </div>
+                <div class="prize" id="prize-2">
+                    <div class="prize-amount">Rp 10.000</div>
+                    <div class="prize-label">Wow! Jackpot!</div>
+                </div>
+            </div>
+        </div>
+        
+        <p class="attempts">Kesempatan tersisa: <span id="attempts">3</span></p>
+        <button class="btn" id="spin-btn">
+            <span id="btn-text">PUTAR SEKARANG</span>
+        </button>
+        
+        <div class="result" id="result">
+            <p id="result-text"></p>
+            <div id="result-actions">
+                <p style="margin-top: 10px;">Screenshot tampilan ini dan kirim ke admin via WhatsApp untuk klaim hadiahmu!</p>
+                <a href="https://wa.me/6281367239118?text=Saya%20memenangkan%20hadiah%20di%20Gacha%20THR%20Spesial!" class="whatsapp-btn" id="wa-btn">
+                    <i>📱</i> Kirim ke Admin
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const spinBtn = document.getElementById('spin-btn');
+            const btnText = document.getElementById('btn-text');
+            const display = document.getElementById('display');
+            const prizes = document.querySelectorAll('.prize');
+            const attemptsEl = document.getElementById('attempts');
+            const resultEl = document.getElementById('result');
+            const resultText = document.getElementById('result-text');
+            const resultActions = document.getElementById('result-actions');
+            const waBtn = document.getElementById('wa-btn');
+            
+            // Inisialisasi game state
+            let gameState = {
+                attempts: 3,
+                hasWon: false,
+                prizesPool: [],
+                usedPrizes: [],
+                sessionId: localStorage.getItem('gacha_session_id') || Date.now().toString()
+            };
+            
+            // Simpan session ID untuk mencegah refresh
+            if (!localStorage.getItem('gacha_session_id')) {
+                localStorage.setItem('gacha_session_id', gameState.sessionId);
+            }
+            
+            // Cek apakah sudah pernah main
+            const savedState = localStorage.getItem(`gacha_state_${gameState.sessionId}`);
+            if (savedState) {
+                gameState = JSON.parse(savedState);
+            } else {
+                // Inisialisasi pool hadiah (5 zonk, 2x5000, 1x10000)
+                gameState.prizesPool = [
+                    'zonk', 'zonk', 'zonk', 'zonk', 'zonk',
+                    '5000', '5000',
+                    '10000'
+                ];
+                // Acak urutan hadiah
+                gameState.prizesPool = gameState.prizesPool.sort(() => Math.random() - 0.5);
+                saveGameState();
+            }
+            
+            // Update tampilan
+            updateUI();
+            
+            // Fungsi untuk menyimpan state game
+            function saveGameState() {
+                localStorage.setItem(`gacha_state_${gameState.sessionId}`, JSON.stringify(gameState));
+            }
+            
+            // Update UI berdasarkan state
+            function updateUI() {
+                attemptsEl.textContent = gameState.attempts;
+                
+                if (gameState.attempts <= 0 || gameState.hasWon) {
+                    spinBtn.disabled = true;
+                    btnText.textContent = gameState.hasWon ? 'SUDAH MENANG' : 'KESEMPATAN HABIS';
+                }
+            }
+            
+            // Reset all prizes to inactive
+            function resetPrizes() {
+                prizes.forEach(prize => {
+                    prize.classList.remove('active');
+                });
+            }
+            
+            // Show a specific prize
+            function showPrize(index) {
+                resetPrizes();
+                prizes[index].classList.add('active');
+            }
+            
+            // Create confetti effect
+            function createConfetti() {
+                const colors = ['#ff6b6b', '#ffa502', '#2ed573', '#1e90ff', '#ff4757', '#7bed9f'];
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = `${Math.random() * 100}%`;
+                    confetti.style.top = `${Math.random() * 100}%`;
+                    confetti.style.width = `${Math.random() * 10 + 5}px`;
+                    confetti.style.height = `${Math.random() * 10 + 5}px`;
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    
+                    document.querySelector('.container').appendChild(confetti);
+                    
+                    // Animation
+                    const animationDuration = Math.random() * 3 + 2;
+                    confetti.style.animation = `confettiFall ${animationDuration}s linear forwards`;
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, animationDuration * 1000);
+                }
+                
+                // Add keyframes dynamically
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    @keyframes confettiFall {
+                        0% {
+                            transform: translateY(-100vh) rotate(0deg);
+                            opacity: 1;
+                        }
+                        100% {
+                            transform: translateY(100vh) rotate(360deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Spin the machine
+            spinBtn.addEventListener('click', function() {
+                if (gameState.attempts <= 0 || gameState.hasWon) return;
+                
+                // Disable button during spin
+                spinBtn.disabled = true;
+                btnText.innerHTML = '<span class="spinner"></span> Memproses...';
+                
+                // Reset result display
+                resultEl.className = 'result';
+                resultActions.style.display = 'none';
+                
+                // Ambil hadiah berikutnya dari pool
+                const prize = gameState.prizesPool.shift();
+                gameState.usedPrizes.push(prize);
+                const prizeIndex = prize === 'zonk' ? 0 : prize === '5000' ? 1 : 2;
+                
+                // Spin animation
+                let spinCount = 0;
+                const totalSpins = 15;
+                const spinDuration = 2000;
+                const spinIntervalTime = spinDuration / totalSpins;
+                
+                const spinInterval = setInterval(() => {
+                    // Show random prize during spin
+                    const randomIndex = Math.floor(Math.random() * 3);
+                    showPrize(randomIndex);
+                    
+                    spinCount++;
+                    
+                    // Slow down and stop at final prize
+                    if (spinCount >= totalSpins) {
+                        clearInterval(spinInterval);
+                        
+                        // Show final prize
+                        showPrize(prizeIndex);
+                        
+                        // Update game state
+                        gameState.attempts--;
+                        if (prize !== 'zonk') {
+                            gameState.hasWon = true;
+                        }
+                        saveGameState();
+                        
+                        // Show result
+                        if (prize !== 'zonk') {
+                            resultText.textContent = `Selamat! Anda memenangkan THR ${prize}!`;
+                            resultEl.classList.add('success', 'show');
+                            resultActions.style.display = 'block';
+                            createConfetti();
+                            
+                            // Update WhatsApp message
+                            waBtn.href = `https://wa.me/6281367239118?text=Saya%20memenangkan%20THR%20${prize}%20di%20Gacha%20THR%20Spesial!%0AScreenshot%20bukti:%20`;
+                        } else if (gameState.attempts === 0) {
+                            resultText.textContent = `Maaf, kesempatan Anda telah habis. Semoga beruntung lain kali!`;
+                            resultEl.classList.add('fail', 'show');
+                        } else {
+                            resultText.textContent = `Maaf, Anda belum beruntung. Masih ada ${gameState.attempts} kesempatan lagi!`;
+                            resultEl.classList.add('fail', 'show');
+                        }
+                        
+                        // Re-enable button if can spin again
+                        if (gameState.attempts > 0 && !gameState.hasWon) {
+                            spinBtn.disabled = false;
+                            btnText.textContent = 'PUTAR SEKARANG';
+                        }
+                        
+                        // Update UI
+                        updateUI();
+                    }
+                }, spinIntervalTime);
+            });
+            
+            // Initialize with zonk
+            showPrize(0);
+            resultActions.style.display = 'none';
+            resultEl.className = 'result';
+        });
+    </script>
+</body>
+</html>
